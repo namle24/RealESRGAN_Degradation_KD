@@ -3,10 +3,6 @@
 <p align="center">
     <img src="https://github.com/namle24/RealESRGAN_Degradation_KD/blob/main/assets/s2.png">
     <img src="https://github.com/namle24/RealESRGAN_Degradation_KD/blob/main/assets/s3.png">
-
-    <p>Limited to super complex images.</p>
-
-    <img src="https://github.com/namle24/RealESRGAN_Degradation_KD/blob/main/assets/s3.png">
 </p>
 Limited to super complex images.</br>
 <p align="center">
