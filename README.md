@@ -1,8 +1,8 @@
 # Towards Real-ESRGAN refinement for Realistic Image Restoration via Advanced Degradation and Knowledge Distillation
 ---
 <p align="center">
-  <img src="D:\RealESRGAN_Using_Degrdation_and_KD\assets\s1.png">
-  <img src="D:\RealESRGAN_Using_Degrdation_and_KD\assets\s3.png">
+  <img src="https://github.com/namle24/RealESRGAN_Degradation_KD/blob/main/assets/s2.png">
+  <img src="https://github.com/namle24/RealESRGAN_Degradation_KD/blob/main/assets/s1.png">
 </p>
 ---
 
