@@ -1,0 +1,102 @@
+name: Finetune_Custom_RealESRGAN_x4plus_subset
+model_type: CustomRealESRGANModel
+scale: 4
+num_gpu: 1
+manual_seed: 123
+
+datasets:
+  train:
+    name: Train
+    type: PairedImageDataset
+    dataroot_gt: /content/dataset_subset/train/hr
+    dataroot_lq: /content/dataset_subset/train/lr
+    gt_size: 256
+    use_hflip: true
+    use_rot: true
+    num_worker_per_gpu: 2
+    batch_size_per_gpu: 4
+    dataset_enlarge_ratio: 1
+    io_backend:
+      type: disk
+  val:
+    name: Val
+    type: PairedImageDataset
+    dataroot_gt: /content/dataset_subset/val/hr
+    dataroot_lq: /content/dataset_subset/val/lr
+    io_backend:
+      type: disk
+
+network_g:
+  type: RRDBNet
+  num_in_ch: 3
+  num_out_ch: 3
+  num_feat: 64
+  num_block: 23
+  num_grow_ch: 32
+
+network_d:
+  type: UNetDiscriminatorSN
+  num_in_ch: 3
+  num_feat: 64
+  skip_connection: true
+
+path:
+  pretrain_network_g: /content/Real-ESRGAN/experiments/pretrained_models/RealESRGAN_x4plus.pth
+  param_key_g: params_ema
+  strict_load_g: true
+  root: /content/Real-ESRGAN
+
+train:
+  optim_g:
+    type: Adam
+    lr: 0.00002
+  optim_d:
+    type: Adam
+    lr: 0.00002
+  scheduler:
+    type: MultiStepLR
+    milestones: [2500]
+    gamma: 0.5
+  total_iter: 10000
+  ema_decay: 0.999
+
+  pixel_opt:
+    type: L1Loss
+    loss_weight: 1.0
+    reduction: mean
+  perceptual_opt:
+    type: PerceptualLoss
+    layer_weights:
+      'conv1_2': 0.1
+      'conv2_2': 0.1
+      'conv3_4': 1.0
+      'conv4_4': 1.0
+      'conv5_4': 1.0
+    vgg_type: vgg19
+    use_input_norm: true
+    perceptual_weight: 1.0
+    style_weight: 0
+  gan_opt:
+    type: GANLoss
+    gan_type: vanilla
+    real_label_val: 1.0
+    fake_label_val: 0.0
+    loss_weight: 0.1
+
+val:
+  val_freq: 2500
+  save_img: true
+  metrics:
+    psnr:
+      type: calculate_psnr
+      crop_border: 4
+      test_y_channel: true
+    ssim:
+      type: calculate_ssim
+      crop_border: 4
+      test_y_channel: true
+
+logger:
+  print_freq: 100
+  save_checkpoint_freq: 2500
+  use_tb_logger: true

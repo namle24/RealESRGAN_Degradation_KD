@@ -1,0 +1,34 @@
+name: Demo
+type: RealESRGANPairedDataset
+scale: 4
+dataroot_gt: /storage/student12/Real-ESRGAN/data/Set5/Set5/GTmod12
+dataroot_lq: /storage/student12/Real-ESRGAN/data/Set5/Set5/LRbicx4/
+meta_info: /storage/student12/Real-ESRGAN/Real-ESRGAN/dataset/meta_info/meta_info_Set5_pair.txt
+io_backend:
+  type: disk
+
+path: #/storage/student12/Real-ESRGAN/Real-ESRGAN/experiments/finetune_RealESRGANx4plus_400k_pairdata/models/net_g_355000.pth
+  pretrain_network_g: /storage/student12/Real-ESRGAN/Real-ESRGAN/experiments/pretrained_models/RealESRGAN_x4plus.pth 
+  strict_load_g: true
+
+phase: train
+gt_size: 128
+use_hflip: True
+use_rot: False
+
+val:
+  save_img: true
+  suffix: ~  # add suffix to saved images, if None, use exp name
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 4
+      test_y_channel: true
+    ssim:
+      type: calculate_ssim
+      crop_border: 4
+      test_y_channel: true
+    niqe:
+      type: calculate_niqe
+      crop_border: 4
