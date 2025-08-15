@@ -1,18 +1,14 @@
 # Towards Real-ESRGAN refinement for Realistic Image Restoration via Advanced Degradation and Knowledge Distillation
 ## <div align="center"><b><a href="README.md">English</a>
-
-<div align="center">
 ---
 <p align="center">
-  <img src="assets/s1.jpg">
-  <img src="assets/s2.jpg">
+  <img src="D:\RealESRGAN_Using_Degrdation_and_KD\assets\s1.png">
+  <img src="D:\RealESRGAN_Using_Degrdation_and_KD\assets\s3.png">
 </p>
 
 ---
 ## **Model's weights: You can install in: [RealESRGAN_Degradation_KD](https://drive.google.com/drive/u/5/folders/1kks1hFgBK5LVQqw3-0xMYh0V9de2B9FG)**
-
 ---
-
 ## **Projects that use BasicSR, and Real-ESRGAN**
 
 - [**Real-ESRGAN**](https://github.com/xinntao/Real-ESRGAN): A practical algorithm for general image restoration
